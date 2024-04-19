@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Lockboxes"""
+
+
 def canUnlockAll(boxes):
     """Determines if all the boxes can be opened or not"""
     if boxes == [] or boxes == [[]] or boxes == [[0]]:
