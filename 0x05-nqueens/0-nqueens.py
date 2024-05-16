@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" N queens puzzle"""
+"""N queens puzzle"""
 import sys
 from typing import List
 
