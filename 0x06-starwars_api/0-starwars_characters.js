@@ -31,4 +31,3 @@ function getCharacters (url) {
         }
     });
     }
-getCharacters(url);
