@@ -9,25 +9,26 @@
 
 const request = require('request');
 const movieId = process.argv[2];
-const url = `https://swapi-api.alx-tools.com/films/${movieId}`;
-function getCharacters (url) {
-    request(url, async function (error, response, body) {
-        if (error) {
-        console.log(error);
-        } else {
-        const characters = JSON.parse(body).characters;
-        for (const character of characters) {
-            await new Promise((resolve, reject) => {
-            request(character, function (error, response, body) {
-                if (error) {
-                reject(error);
-                } else {
-                console.log(JSON.parse(body).name);
-                resolve();
-                }
-            });
-            });
-        }
-        }
-    });
+const url = 'https://swapi-api.hbtn.io/api';
+
+if (movieId) {
+  request(`${url}/films/${movieId}`, async (error, response, body) => {
+    if (error) {
+      console.error(error);
+    } else {
+      const characters = JSON.parse(body).characters;
+      for (const character of characters) {
+        await new Promise((resolve, reject) => {
+          request(character, (error, response, body) => {
+            if (error) {
+              reject(error);
+            } else {
+              console.log(JSON.parse(body).name);
+              resolve();
+            }
+          });
+        });
+      }
     }
+  });
+}
