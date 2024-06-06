@@ -18,10 +18,3 @@ def makeChange(coins, total):
         return -1
     else:
         return dp[total]
-
-# Example usage:
-coins = [1, 5, 10, 25]  # Example coin denominations
-total_amount = 30
-result = makeChange(coins, total_amount)
-print(f"Minimum coins required: {result}")
-
