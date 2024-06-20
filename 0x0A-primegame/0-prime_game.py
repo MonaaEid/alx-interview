@@ -2,6 +2,19 @@
 """Prime Game"""
 
 
+def prime(n):
+    """return list of prime numbers"""
+    primes = []
+    for i in range(2, n + 1):
+        is_prime = True
+        for j in range(2, i):
+            if i % j == 0:
+                is_prime = False
+                break
+        if is_prime:
+            primes.append(i)
+    return primes
+
 def isWinner(x, nums):
     """Prime Game"""
     if x == 0 or x == 1:
@@ -10,12 +23,11 @@ def isWinner(x, nums):
         return "Ben"
     if x == 3:
         return "Maria"
-    for _, n in zip(range(x), nums):
-        primes_count = len(list(filter(lambda x: x, range(1,10000))))
-        bens_wins += primes_count % 2 == 0
-        marias_wins += primes_count % 2 == 1
-    if marias_wins == bens_wins:
-        return None
-    return 'Maria' if marias_wins > bens_wins else 'Ben'
+    primes = prime(max(nums))
+    score = 0
+    for i in range(x):
+        score += sum([1 for j in primes if j <= nums[i]])
+    if score % 2 == 0:
+        return "Maria"
+    return "Ben"
 
-print("Winner: {}".format(isWinner(3, [1, 2, 3])))
