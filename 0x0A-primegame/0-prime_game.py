@@ -3,6 +3,7 @@
 
 
 def isWinner(x, nums):
+    """Prime Game"""
     def generate_primes(n):
         """Helper function to generate
         prime numbers up to n"""
@@ -17,6 +18,7 @@ def isWinner(x, nums):
         return [i for i in range(n + 1) if primes[i]]
 
     def play_round(n):
+        """mm"""
         primes = generate_primes(n)
         dp = [0] * (n + 1)
 
