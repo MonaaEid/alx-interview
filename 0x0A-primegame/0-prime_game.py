@@ -13,6 +13,7 @@ def primes(n):
                 sieve[i] = False
     return prime
 
+
 def isWinner(x, nums):
     """Prime Game"""
     if x is None or nums is None or x == 0 or nums == []:
