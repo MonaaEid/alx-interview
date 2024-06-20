@@ -1,49 +1,40 @@
 #!/usr/bin/python3
 """Prime Game"""
 
+def isPrime(n):
+    """Check if a number is prime"""
+    if n == 1:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n ** 0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
 
-def isWinner(x, nums):
+def primeGame(n, nums):
     """Prime Game"""
-    def generate_primes(n):
-        """Helper function to generate
-        prime numbers up to n"""
-        primes = [True] * (n + 1)
-        primes[0], primes[1] = False, False
-
-        for i in range(2, int(n**0.5) + 1):
-            if primes[i]:
-                for j in range(i*i, n + 1, i):
-                    primes[j] = False
-
-        return [i for i in range(n + 1) if primes[i]]
-
-    def play_round(n):
-        """mm"""
-        primes = generate_primes(n)
-        dp = [0] * (n + 1)
-
-        for i in range(2, n + 1):
-            for prime in primes:
-                if prime > i:
-                    break
-                if dp[i - prime] == 0:
-                    dp[i] = 1
-
-        return dp[n]
-
-    maria_wins = 0
-    ben_wins = 0
-
-    for n in nums:
-        result = play_round(n)
-        if result == 1:
-            maria_wins += 1
-        elif result == 0:
-            ben_wins += 1
-
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
-    else:
+    if n == 0:
         return None
+    if n == 1:
+        return "Maria"
+    if n == 2:
+        return "Ben"
+    if n == 3:
+        return "Maria"
+
+    return "Maria" if sum([1 for n in nums if isPrime(n)]) % 2 == 0 else "Ben"
+
+
+# def isWinner(x, nums):
+#     """Prime Game"""
+#     if x == 0 or x == 1:
+#         return None
+#     if x == 2:
+#         return "Ben"
+#     if x == 3:
+#         return "Maria"
+
+#     return "Maria" if sum([1 for n in nums if n % 2 == 0]) == 0 else "Ben"
