@@ -1,40 +1,30 @@
 #!/usr/bin/python3
 """Prime Game"""
 
-def isPrime(n):
-    """Check if a number is prime"""
-    if n == 1:
-        return False
-    if n == 2:
-        return True
-    if n % 2 == 0:
-        return False
-    for i in range(3, int(n ** 0.5) + 1, 2):
-        if n % i == 0:
-            return False
-    return True
+def primes(n):
+    """return a list of prime numbers up to n"""
+    prime = []
+    sieve = [True] * (n + 1)
+    for p in range(2, n + 1):
+        if (sieve[p]):
+            prime.append(p)
+            for i in range(p, n + 1, p):
+                sieve[i] = False
+    return prime
 
 def isWinner(x, nums):
     """Prime Game"""
-    if x == 0:
+    if x is None or nums is None or x == 0 or nums == []:
         return None
-    if x == 1:
-        return "Maria"
-    if x == 2:
-        return "Ben"
-    if x == 3:
-        return "Maria"
-
-    return "Maria" if sum([1 for x in nums if isPrime(x)]) % 2 == 0 else "Ben"
-
-
-# def isWinner(x, nums):
-#     """Prime Game"""
-#     if x == 0 or x == 1:
-#         return None
-#     if x == 2:
-#         return "Ben"
-#     if x == 3:
-#         return "Maria"
-
-#     return "Maria" if sum([1 for n in nums if n % 2 == 0]) == 0 else "Ben"
+    Maria = Ben = 0
+    for i in range(x):
+        prime = primes(nums[i])
+        if len(prime) % 2 == 0:
+            Ben += 1
+        else:
+            Maria += 1
+    if Maria > Ben:
+        return 'Maria'
+    elif Ben > Maria:
+        return 'Ben'
+    return None
