@@ -19,15 +19,15 @@ def isWinner(x, nums):
     """Prime Game"""
     if x == 0 or x == 1:
         return None
-    if x == 2:
-        return "Ben"
-    if x == 3:
-        return "Maria"
-    primes = prime(max(nums))
-    score = 0
-    for i in range(x):
-        score += sum([1 for j in primes if j <= nums[i]])
-    if score % 2 == 0:
+    n = max(nums)
+    primes = prime(n)
+    score = {1: 0, 2: 0}
+    for i in range(1, x + 1):
+        for j in nums:
+            if j in primes:
+                score[i % 2] += 1
+    if score[1] == score[2]:
+        return None
+    if score[1] > score[2]:
         return "Maria"
     return "Ben"
-
