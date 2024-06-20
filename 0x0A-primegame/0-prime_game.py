@@ -11,7 +11,7 @@ def isWinner(x, nums):
     if x == 3:
         return "Maria"
     for _, n in zip(range(x), nums):
-        primes_count = len(list(filter(lambda x: x, primes[0: n])))
+        primes_count = len(list(filter(lambda x: x, range(1,10000))))
         bens_wins += primes_count % 2 == 0
         marias_wins += primes_count % 2 == 1
     if marias_wins == bens_wins:
